@@ -1,0 +1,3 @@
+[submodule "osa-3/puhelinluettelo-backend"]
+	path = osa-3/puhelinluettelo-backend
+	url = ./osa-3/puhelinluettelo-backend
