@@ -38,7 +38,8 @@ const ContactForm = ({name, number, contacts, setName, setNumber, setContacts, s
                     setTimeout(() => setNotification({message: null, type: null}), 5000);
                 })
                 .catch(error => {
-                    setNotification({message: `Cannot add ${contactObject.name}`, type: "Error"});
+                    console.log(error.response.data.error);
+                    setNotification({ message: `${error.response.data.error}`, type: "Error"});
                     setTimeout(() => setNotification({message: null, type: null}), 5000);
                 });
         }

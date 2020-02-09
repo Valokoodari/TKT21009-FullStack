@@ -1,0 +1,26 @@
+{
+  "name": "puhelinluettelo-backend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build:ui": "rm -rf build && cd ../../osa-2/puhelinluettelo && npm run build --prod && cp -r build ../../osa-3/puhelinluettelo-backend",
+    "deploy:full": "npm run build:ui && cd ../../../Heroku && cp -r puhelinluettelo-backend/.git .git_tmp/ && rm -rf puhelinluettelo-backend && cp -r ../FullStack/osa-3/puhelinluettelo-backend puhelinluettelo-backend/ && cp -r .git_tmp puhelinluettelo-backend/.git/ && rm -rf .git_tmp && cd puhelinluettelo-backend && git add . && git commit -m deploy && git push heroku master",
+    "lint": "eslint ."
+  },
+  "author": "Valokoodari",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.11",
+    "mongoose-unique-validator": "^2.0.3",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.2"
+  }
+}
