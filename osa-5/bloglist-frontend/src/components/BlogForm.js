@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import blogService from "../services/blogs";
 
-const BlogForm = ({blogs, setBlogs, setNotification}) => {
+const BlogForm = ({ createBlog }) => {
     const [blogTitle, setBlogTitle] = useState("");
     const [blogAuthor, setBlogAuthor] = useState("");
     const [blogUrl, setBlogUrl] = useState("");
@@ -11,28 +10,11 @@ const BlogForm = ({blogs, setBlogs, setNotification}) => {
     const handleCreation = async (event) => {
         event.preventDefault();
 
-        const blogObject = {
+        createBlog({
             title: blogTitle,
             author: blogAuthor,
             url: blogUrl
-        };
-
-        try {
-            const savedBlog = await blogService.create(blogObject);
-            setBlogs(blogs.concat(savedBlog));
-
-            setNotification({
-                message: `A new blog ${savedBlog.title} by ${savedBlog.author} added.`,
-                type: "success"
-            });
-            setTimeout(() => setNotification({ message: null, type: null }), 5000);
-        } catch (exception) {
-            setNotification({
-                message: "Could not add a new blog.",
-                type: "error"
-            });
-            setTimeout(() => setNotification({ message: null, type: null }), 5000);
-        }
+        });
 
         setBlogTitle("");
         setBlogAuthor("");
@@ -47,34 +29,34 @@ const BlogForm = ({blogs, setBlogs, setNotification}) => {
             <div  style={{ display: visible ? "" : "None" }}>
                 <form onSubmit={handleCreation}>
                     <h2>Create a new blog</h2>
-                    <div>
+                    <div className="titleInput">
                         title:&nbsp;
                         <input
                             type="text"
+                            id="title-input"
                             value={blogTitle}
-                            name="Title"
                             onChange={({target}) => setBlogTitle(target.value)}
                         />
                     </div>
-                    <div>
+                    <div className="authorInput">
                         author:&nbsp;
                         <input
                             type="text"
+                            id="author-input"
                             value={blogAuthor}
-                            name="Author"
                             onChange={({target}) => setBlogAuthor(target.value)}
                         />
                     </div>
-                    <div>
+                    <div className="urlInput">
                         url:&nbsp;
                         <input
                             type="text"
+                            id="url-input"
                             value={blogUrl}
-                            name="Url"
                             onChange={({target}) => setBlogUrl(target.value)}
                         />
                     </div>
-                    <button type="submit">create</button>
+                    <button id="submit-button" type="submit">create</button>
                 </form>
                 <button onClick={() => setVisible(false)}>cancel</button>
             </div>
@@ -83,9 +65,7 @@ const BlogForm = ({blogs, setBlogs, setNotification}) => {
 };
 
 BlogForm.propTypes = {
-    blogs: PropTypes.array.isRequired,
-    setBlogs: PropTypes.func.isRequired,
-    setNotification: PropTypes.func.isRequired
+    createBlog: PropTypes.func.isRequired
 };
 
 export default BlogForm;

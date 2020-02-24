@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Notification = ({notification}) => {
     if (notification.type === "error") {
         return (
-            <div style={{border: "5px solid red", borderRadius: "7px", width: "400px", padding: "10px", backgroundColor: "#BBBBBB"}}>
+            <div className="error" style={{border: "5px solid red", borderRadius: "7px", width: "400px", padding: "10px", backgroundColor: "#BBBBBB"}}>
                 {notification.message}
             </div>
         );
@@ -12,7 +12,7 @@ const Notification = ({notification}) => {
 
     if (notification.type === "success") {
         return (
-            <div style={{border: "5px solid green", borderRadius: "7px", width: "400px", padding: "10px", backgroundColor: "#BBBBBB"}}>
+            <div className="success" style={{border: "5px solid green", borderRadius: "7px", width: "400px", padding: "10px", backgroundColor: "#BBBBBB"}}>
                 {notification.message}
             </div>
         );
