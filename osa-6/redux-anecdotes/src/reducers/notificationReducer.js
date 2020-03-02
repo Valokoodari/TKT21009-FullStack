@@ -11,16 +11,15 @@ const reducer = (state = initialState, action) => {
   };
 };
 
-export const setNotification = message => {
-  return {
-    type: "SET_NOTIFICATION",
-    message
-  };
-};
-
-export const clearNotification = () => {
-  return {
-    type: "CLEAR_NOTIFICATION"
+export const setNotification = (message, time) => {
+  return dispatch => {
+    dispatch({
+      type: "SET_NOTIFICATION",
+      message
+    });
+    setTimeout(() => dispatch({
+      type: "CLEAR_NOTIFICATION",
+    }), time * 1000);
   };
 };
 
